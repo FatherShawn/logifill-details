@@ -4,7 +4,7 @@ logifill-details
 An adaptation of Marian Kostadinov's Polyfill for html5 details and summary elements.
 This is an unobtrusive limited dependency implementation
 of HTML5 details/summary implementation. It uses Modernizer for feature detection.
-See browser support for <details> at http://caniuse.com/#feat=details as of March 2016 the
+See browser support for `<details>` at http://caniuse.com/#feat=details as of March 2016 the
 tag is supported in Chrome, Safari, iOS Safari, Opera and Android browser.
 
 This polyfill adds full support for Firefox and IE8+.

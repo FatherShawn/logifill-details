@@ -1,20 +1,16 @@
 logifill-details
 ================
 
-Polyfill for html5 details and summary elements.
-This is an unobtrusive zero dependency implementation
-of HTML5 details/summary implementation. As of May 2012,
-only webkit browsers support it.
+An adaptation of Marian Kostadinov's Polyfill for html5 details and summary elements.
+This is an unobtrusive limited dependency implementation
+of HTML5 details/summary implementation. It uses Modernizer for feature detection.
+See browser support for <details> at http://caniuse.com/#feat=details as of March 2016 the
+tag is supported in Chrome, Safari, iOS Safari, Opera and Android browser.
 
 This polyfill adds full support for Firefox and IE8+.
-In IE7 it works (almost) fine. But due to the lack of support
-for :before, no arrow is shown before the summary elements.
-This can be fixed by adding a padding and a background image
-to the summary elements. For now, it is not a part of the
-implementation. 
 
 Unlike the other solutions, this one has two specific features:
-1. It does not rely on jQuery or any other library.
+1. It does not rely on jQuery or but does make use of Modernizr. Use Marian's original if you want no dependencies at all.
 2. It works for dynamic content because it does not attach
 any event listeners to any summary or details elements.
 There is a single listener that handles the click event

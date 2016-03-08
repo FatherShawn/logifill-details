@@ -5,15 +5,16 @@
  * in all modern browsers.
  * http://dev.w3.org/html5/spec/Overview.html#the-details-element
  * 
- * @author Marian Kostadinov
- * @version 0.5
- * @license http://www.gnu.org/licenses/lgpl-3.0.txt LGPL
+ * @author Shawn Duncan
+ * @version 0.1
+ * @license GNU GENERAL PUBLIC LICENSE, Version 2, June 1991
  *
- * Date $LastChangedDate: 2012-05-27 09:07:30 +0300 (Sun, 27 May 2012) $
+ * Date $LastChangedDate:  Tuesday, March 8, 2016: 15:43 UTC $
  *
  */
 
 ;(function() {
+	"use strict";
 	var summaryNode = 'summary';
 	var detailsNode = 'details';
 	
@@ -24,30 +25,8 @@
 	
 	function init() {
 		
-		//Feature support check used here: 
-		//http://mathiasbynens.be/notes/html5-details-jquery
-		var isDetailsSupported = (function(doc) {
-			var el = doc.createElement('details'), fake, root, diff;
-			if (!('open' in el)) {
-				return false;
-			}
-			root = doc.body || (function() {
-				var de = doc.documentElement;
-			    fake = true;
-			    return de.insertBefore (doc.createElement('body'), de.firstElementChild || de.firstChild);
-			}());
-			el.innerHTML = '<summary>a</summary>b';
-			el.style.display = 'block';
-			root.appendChild (el);
-			diff = el.offsetHeight;
-			el.open = true;
-			diff = diff != el.offsetHeight;
-			root.removeChild(el);
-			if (fake) {
-				root.parentNode.removeChild(root);
-			}
-			return diff;
-		}(document));
+		// Use Modernizr
+		var isDetailsSupported = Modernizr.details;
 		
 		if (!isDetailsSupported) {
 			var rightArrow = String.fromCharCode (9658);
@@ -95,11 +74,13 @@
 					document.attachEvent ('on' + eventType, function (event) {
 						//Compatibility code for the event object.
 						var e = event || window.event;
-						if (!e.target) e.target = e.srcElement;
-						if (typeof e.preventDefault != 'function') {
+						if (!e.target) {
+							e.target = e.srcElement;
+						}
+						if (typeof e.preventDefault !== 'function') {
 							e.preventDefault = function() { this.returnValue = false; };
 						}
-						if (typeof e.stopPropagation != 'function') {
+						if (typeof e.stopPropagation !== 'function') {
 							e.stopPropagation = function() { this.cancelBubble = true; };
 						}								
 						callback (e); 
@@ -126,7 +107,7 @@
 				//child elements within the summary element.
 				while (target) {
 					targetNode = target.nodeName.toLowerCase();
-					if (targetNode == summaryNode) {
+					if (targetNode === summaryNode) {
 						parentNode = target.parentNode;
 						//getAttributeNode is used instead of hasAttribute because 
 						//older IEs don't support it.						
@@ -140,7 +121,7 @@
 						body.className = body.className.substr (dummyClassNameLength);
 						break;
 					}
-					if (targetNode == detailsNode) {
+					if (targetNode === detailsNode) {
 						break;
 					}
 					target = target.parentNode;
